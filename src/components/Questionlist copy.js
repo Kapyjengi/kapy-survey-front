@@ -14,24 +14,24 @@ export default function Questionlist() {
 
     const getQuestions = () => {
 
-        fetch('https://kapysurvey-back.herokuapp.com/surveys')
+        fetch('https://kapysurvey-back.herokuapp.com/surveys/')
             .then(response => response.json())
             .then(data => setQuestion(data))
-           // .catch(err => console.log(err))
+            .catch(err => console.log(err))
     }
 
     const columns = [
         {
             Header: 'Id',
-            accessor: 'questions[0].questionId'
+            accessor: 'questionId'
         },
         {
             Header: 'Question',
-            accessor: 'questions[0].questionText'
+            accessor: 'questionText'
         },
         {
             Header: 'Survey name',
-            accessor: 'surveyName'
+            accessor: 'survey.surveyName'
         }
     ]
 

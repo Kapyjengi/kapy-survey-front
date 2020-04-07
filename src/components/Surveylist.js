@@ -14,25 +14,26 @@ export default function Surveylist() {
 
     const getSurveys = () => {
 
-        fetch('https://kapysurvey.herokuapp.com/surveys')
+        fetch('https://kapysurvey-back.herokuapp.com/surveys')
             .then(response => response.json())
             .then(data => setSurvey(data))
-            .catch(err => console.log(err))
+            console.log(survey)
+           // .catch(err => console.log(err))
     }
 
     const columns = [
         
         {
             Header: 'Id',
-            accessor: 'survey.surveyId'
+            accessor: 'surveyId'
         },
         {
             Header: 'Survey name',
-            accessor: 'survey.surveyName'
+            accessor: 'surveyName'
         },
         {
             Header: 'Survey description',
-            accessor: 'survey.surveyDescpription'
+            accessor: 'surveyDescription'
         }
         
     ]

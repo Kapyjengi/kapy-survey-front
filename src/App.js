@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <AppBar posiotion="static">
         <Toolbar>
-          <Typography variant="h6">KAPYSurvey</Typography>
+        <Typography variant="h6">KAPYSurvey</Typography>
           <Breadcrumbs style={{ margin: 20 }} aria-label="breadcrumb" color="white">
             <Link color="inherit" href="/Surveylist" onClick={Surveylist}>Surveys</Link>
             <Link color="inherit" href="/Questionlist" onClick={Questionlist}>Questions</Link>
