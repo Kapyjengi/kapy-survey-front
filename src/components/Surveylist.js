@@ -8,6 +8,7 @@ export default function Surveylist() {
     
     const [survey, setSurvey] = useState([]);
 
+
     useEffect(() => {
         getSurveys();
     }, [])
@@ -17,15 +18,17 @@ export default function Surveylist() {
         fetch('https://kapysurvey-back.herokuapp.com/surveys')
             .then(response => response.json())
             .then(data => setSurvey(data))
-            console.log(survey)
-           // .catch(err => console.log(err))
+            .catch(err => console.error(err))
     }
+
+   
 
     const columns = [
         
         {
             Header: 'Id',
             accessor: 'surveyId'
+            
         },
         {
             Header: 'Survey name',
@@ -41,7 +44,8 @@ export default function Surveylist() {
     return (
         <div>
             <h1> </h1>
-            <ReactTable defaultPageSize={10} filterable={true} data={survey} columns={columns} />
+          <ReactTable defaultPageSize={10} filterable={true} data={survey} columns={columns} />
+     
         </div>
     );
 }
