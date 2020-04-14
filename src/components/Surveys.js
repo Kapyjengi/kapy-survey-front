@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import ReactTable from 'react-table-v6';
 import 'react-table-v6/react-table.css';
-import Showsurveyquestion from './Showsurveyquestion';
-import Questionlist from './Questionlist';
+import ShowQuestionsButton from './ShowQuestionsButton';
+import Questions from './Questions';
 
 export default function Surveylist() {
 
   const [survey, setSurvey] = useState([]);
-  const [questionpattern, setQuestionpattern] = useState([]);
+  const [questionPattern, setQuestionPattern] = useState([]);
+  const [surveyId, setSurveyId] = useState([]);
 
   useEffect(() => {
     getSurveys();
   }, [])
 
   const getSurveys = () => {
-
     fetch('https://kapysurvey-back.herokuapp.com/surveys')
       .then(response => response.json())
       .then(data => setSurvey(data))
@@ -22,19 +22,16 @@ export default function Surveylist() {
   }
 
   const showQuestions = (id) => {
+    setSurveyId(id);
     fetch('https://kapysurvey-back.herokuapp.com/surveys/' + id)
       .then(response => response.json())
-      .then(data => setQuestionpattern(data))
+      .then(data => setQuestionPattern(data))
       .catch(err => console.error(err))
-
   }
 
   const columns = [
     {
-      Cell: row => (<Showsurveyquestion data={row.original} showQuestions={showQuestions} />)
-    },
-    {
-      Header: 'Id',
+      Header: 'Survey id',
       accessor: 'surveyId'
 
     },
@@ -45,11 +42,16 @@ export default function Surveylist() {
     {
       Header: 'Survey description',
       accessor: 'surveyDescription'
+    },
+    {
+      Cell: row => (<ShowQuestionsButton data={row.original} showQuestions={showQuestions} />)
     }
-
   ]
-
-  if (questionpattern == "") {
+  
+  // Sovellus ei toimi, jos ehtolauseeseen lisää kolmannen "=" merkin.
+  // Nyt vertaillaan sitä, onko questionPattern state tyhjä vai ei
+  // Kolmas "=" merkki vertailee tyhjyyden lisäksi tietotyyppejä. 
+  if (questionPattern == "") {
     return (
       <div>
         <h1> </h1>
@@ -59,7 +61,7 @@ export default function Surveylist() {
   } else {
     return (
       <div>
-        <Questionlist survey={questionpattern} getSurveys={getSurveys} />
+        <Questions surveyId={surveyId} />
       </div>
     )
   }

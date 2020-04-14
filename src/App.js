@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import './App.css';
-import Surveit from './components/Surveit';
+import Surveys from './components/Surveys';
 import { BrowserRouter, Route } from "react-router-dom"
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
@@ -13,16 +13,16 @@ function App() {
     <div className="App">
       <AppBar posiotion="static">
         <Toolbar>
-        <Typography variant="h6">KAPYSurvey</Typography>
-          <Breadcrumbs style={{ margin: 20}} aria-label="breadcrumb" color="white">
-            <Link color="inherit" href="/Surveit" onClick={Surveit}>Surveys</Link>
+          <Typography variant="h6">KÄPYSurvey</Typography>
+          <Breadcrumbs style={{ margin: 20 }} aria-label="breadcrumb" color="white">
+            <Link color="inherit" href="/Surveys" onClick={Surveys}>Surveys</Link>
           </Breadcrumbs>
         </Toolbar>
       </AppBar>
       <BrowserRouter>
         <div>
-          <Link to="/Surveit">Survey</Link>{' '}
-          <Route path="/Surveit" component={Surveit} />
+          <Link to="/Surveys">Survey</Link>{' '}
+          <Route path="/Surveys" component={Surveys} />
         </div>
       </BrowserRouter>
     </div>
