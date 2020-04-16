@@ -7,6 +7,7 @@ import Surveys from './components/Surveys';
 import { BrowserRouter, Route } from "react-router-dom"
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
+import Answer from './components/Answer';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Typography variant="h6">KÄPYSurvey</Typography>
           <Breadcrumbs style={{ margin: 20 }} aria-label="breadcrumb" color="white">
             <Link color="inherit" href="/Surveys" onClick={Surveys}>Surveys</Link>
+            <Link color="inherit" href="/Answer" onClick={Answer}>Answer question</Link>
           </Breadcrumbs>
         </Toolbar>
       </AppBar>
@@ -23,6 +25,10 @@ function App() {
         <div>
           <Link to="/Surveys">Survey</Link>{' '}
           <Route path="/Surveys" component={Surveys} />
+        </div>
+        <div>
+          <Link to="/Answer">Answer question</Link>{' '}
+          <Route path="/Answer" component={Answer} />
         </div>
       </BrowserRouter>
     </div>
