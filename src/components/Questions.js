@@ -30,8 +30,7 @@ export default function Questionlist(props) {
 
     return (
         <div>
-            <h1></h1>
-            <h1> paskanenkysely </h1>
+            <h1>asdf</h1>
             <ReactTable
                 defaultPageSize={10}
                 filterable={true}
