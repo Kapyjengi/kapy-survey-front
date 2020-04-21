@@ -20,18 +20,28 @@ export default function Answer(props){
     const [answer, setAnswer] = useState('');
     const [questions, setQuestions] = useState([]);
     const [questionNumber, setQuestionNumber] =useState(0);    
-    const [currentQuestion, setCurrentQuestion] = useState('');
+    const [currentQuestion, setCurrentQuestion] = useState('Alkukysymys');
 
     useEffect(() => {
         // getQuestions();
         testData(); // TEST
+        wait(1000);
         displayNextQuestion();
     }, [])
 
     // TEST
     const testData = () => {
         setQuestions(["Oliko hyvaa", "Miltä tuntuu", "Katsoitko peiliin"]);
+       
     }
+    // TEST
+    function wait(ms){
+        var start = new Date().getTime();
+        var end = start;
+        while(end < start + ms) {
+          end = new Date().getTime();
+       }
+     }
  
     const getQuestions = () => {
         fetch('https://kapysurvey-back.herokuapp.com/surveys/' + props.surveyId + '/questions'
@@ -43,9 +53,8 @@ export default function Answer(props){
     }
 
     const displayNextQuestion = () => {
-        setQuestionNumber(questionNumber + 1);
         setCurrentQuestion(questions[questionNumber]);
-        
+        setQuestionNumber(questionNumber + 1);
     }
 
     const submitAnswer= () => {
