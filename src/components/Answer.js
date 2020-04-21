@@ -19,7 +19,7 @@ import React, { useEffect, useState } from 'react';
 export default function Answer(props){
     const [answer, setAnswer] = useState('');
     const [questions, setQuestions] = useState([]);
-    const [questionNumber, setQuestionNumber] =useState(0);
+    const [questionNumber, setQuestionNumber] =useState(0);    
     const [currentQuestion, setCurrentQuestion] = useState('');
 
     useEffect(() => {
@@ -43,8 +43,9 @@ export default function Answer(props){
     }
 
     const displayNextQuestion = () => {
-        setCurrentQuestion(questions[questionNumber]);
         setQuestionNumber(questionNumber + 1);
+        setCurrentQuestion(questions[questionNumber]);
+        
     }
 
     const submitAnswer= () => {
