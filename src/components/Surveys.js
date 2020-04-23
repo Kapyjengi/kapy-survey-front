@@ -9,6 +9,7 @@ export default function Surveylist() {
   const [survey, setSurvey] = useState([]);
   const [questionPattern, setQuestionPattern] = useState([]);
   const [surveyId, setSurveyId] = useState([]);
+  const [surveyName, setSurveyName] = useState([]);
 
   useEffect(() => {
     getSurveys();
@@ -21,8 +22,11 @@ export default function Surveylist() {
       .catch(err => console.error(err))
   }
 
-  const showQuestions = (id) => {
+
+  const showQuestions = (id, surveyname) => {
     setSurveyId(id);
+    setSurveyName(surveyname)
+
     fetch('https://kapysurvey-back.herokuapp.com/surveys/' + id)
       .then(response => response.json())
       .then(data => setQuestionPattern(data))
@@ -47,7 +51,7 @@ export default function Surveylist() {
       Cell: row => (<ShowQuestionsButton data={row.original} showQuestions={showQuestions} />)
     }
   ]
-  
+
   // Sovellus ei toimi, jos ehtolauseeseen lisää kolmannen "=" merkin.
   // Nyt vertaillaan sitä, onko questionPattern state tyhjä vai ei
   // Kolmas "=" merkki vertailee tyhjyyden lisäksi tietotyyppejä. 
@@ -61,7 +65,7 @@ export default function Surveylist() {
   } else {
     return (
       <div>
-        <Questions surveyId={surveyId} />
+        <Questions surveyId={surveyId} surveyName={surveyName} />
       </div>
     )
   }

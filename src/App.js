@@ -17,7 +17,6 @@ function App() {
           <Typography variant="h6">KÄPYSurvey</Typography>
           <Breadcrumbs style={{ margin: 20 }} aria-label="breadcrumb" color="white">
             <Link color="inherit" href="/Surveys" onClick={Surveys}>Surveys</Link>
-            <Link color="inherit" href="/Answer" onClick={Answer}>Answer question</Link>
           </Breadcrumbs>
         </Toolbar>
       </AppBar>
@@ -26,10 +25,7 @@ function App() {
           <Link to="/Surveys">Survey</Link>{' '}
           <Route path="/Surveys" component={Surveys} />
         </div>
-        <div>
-          <Link to="/Answer">Answer question</Link>{' '}
-          <Route path="/Answer" component={Answer} />
-        </div>
+
       </BrowserRouter>
     </div>
   );

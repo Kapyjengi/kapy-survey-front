@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import Surveys from './Surveys';
+import Link from '@material-ui/core/Link';
+import { Route } from "react-router-dom";
+import Button from '@material-ui/core/Button';
+
 
 /*
 1. Haetaan tietty kysymysteksti
@@ -16,35 +21,41 @@ import React, { useEffect, useState } from 'react';
 
 */
 
-export default function Answer(props){
-    const [answer, setAnswer] = useState('');
+export default function Answer(props) {
+    const [answer, setAnswer] = useState([]);
+    const [realanswer, setRealanswer] = useState([]);
     const [questions, setQuestions] = useState([]);
-    const [questionNumber, setQuestionNumber] =useState(0);    
-    const [currentQuestion, setCurrentQuestion] = useState('Alkukysymys');
+    const [questionsid, setQuestionsid] = useState([]);
+    const [questionNumber, setQuestionNumber] = useState(-1);
+    const [currentQuestion, setCurrentQuestion] = useState('Start');
+    const [backToBeginning, setBackToBeginnig] = useState(0);
+    const [answered, setAnswered] = useState(false);
+
 
     useEffect(() => {
-        // getQuestions();
-        testData(); // TEST
-        wait(1000);
-        displayNextQuestion();
+        getQuestions();
+        //  testData(); // TEST
+        //wait(1000);
+
+        //  displayNextQuestion();
     }, [])
 
     // TEST
     const testData = () => {
         setQuestions(["Oliko hyvaa", "Miltä tuntuu", "Katsoitko peiliin"]);
-       
+
     }
     // TEST
-    function wait(ms){
+    function wait(ms) {
         var start = new Date().getTime();
         var end = start;
-        while(end < start + ms) {
-          end = new Date().getTime();
-       }
-     }
- 
+        while (end < start + ms) {
+            end = new Date().getTime();
+        }
+    }
+
     const getQuestions = () => {
-        fetch('https://kapysurvey-back.herokuapp.com/surveys/' + props.surveyId + '/questions'
+        fetch('https://kapysurvey-back.herokuapp.com/surveys/' + props.surveyId
         )
             .then(response => response.json())
             .then(data => setQuestions(data.questions)) // TODO
@@ -52,36 +63,137 @@ export default function Answer(props){
             .catch(err => console.error(err))
     }
 
-    const displayNextQuestion = () => {
-        setCurrentQuestion(questions[questionNumber]);
+
+
+    const displayNextQuestion = (event) => {
+
+        //console.log(questionNumber)
+        for (let index = 0; index < questions.length; index++) {
+            //console.log("i:" + questionNumber + "  index:" + index)
+            if (questionNumber === index) {
+                setQuestionsid([...questionsid, { id: questions[index].questionId }])
+                setCurrentQuestion(questions[index].questionText)
+                if (index !== 0) {
+                    setRealanswer([...realanswer, { answer }])
+                }
+
+            }
+
+        }
+
+        if (questionNumber === questions.length) {
+            setRealanswer([...realanswer, { answer }])
+        }
+        setAnswered(true)
         setQuestionNumber(questionNumber + 1);
     }
 
-    const submitAnswer= () => {
-        fetch ('https://kapysurvey-back.herokuapp.com/surveys/' + props.surveyId +"/submitanswers" ,
-        {
-        method: 'POST', 
-        headers: {'Content-Type': 'application/json' }
-        ,
-        body: JSON.stringify(answer)
-    })
-        .catch(err => console.error(err))
-    
+    const submitAnswer = () => {
+        for (let i = 0; i < questions.length; i++) {
+
+            let wholeanswer = [];
+
+            wholeanswer = {
+                question: {
+                    "questionId": questionsid[i].id,
+                    "questionText": questions[i].questionText
+                },
+                "answerText": realanswer[i].answer.answer
+            }
+            //console.log(wholeanswer)
+            //console.log(JSON.stringify(wholeanswer))
+
+
+            fetch('https://kapysurvey-back.herokuapp.com/submitanswer',
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                    ,
+                    body: JSON.stringify(wholeanswer)
+
+                })
+                .catch(err => console.error(err))
+
+        } // for
+        setBackToBeginnig(1)
+
     }
 
+    const BacktoBegin = () => {
+        setBackToBeginnig(2);
+    }
+
+    const begin = () => {
+        setQuestionNumber(0)
+        displayNextQuestion();
+    };
+
+    const clearText = (event) => {
+        if (answered == true) {
+            event.target.value = "";
+            setAnswered(false)
+        }
+    }
     const inputChanged = (event) => {
-        setAnswer({...answer,[event.target.name]:event.target.value});
-      };
-      // {question}
-      // <button onClick={submitAnswer}>Send</button>
-    
-      return (
-        <div>
-            <h1> {currentQuestion} </h1> 
+        if (answered == false) {
+            setAnswer({ ...answer, [event.target.name]: event.target.value });
+        } else {
+            event.target.value = "";
+            setAnswered(false)
+        }
+
+    };
+    // {question}
+    // <button onClick={submitAnswer}>Send</button>
+    if (backToBeginning === 1) {
+        return (
             <div>
-            <textarea type="text" name="answer" value={answer.value} onChange={inputChanged} />
-            <button onClick={displayNextQuestion}>Next</button>
-          </div>
-        </div>
-    );
+                <h4>täytettä</h4>
+                <h1>FEEDBACK IS SENDED TO TEACHER</h1>
+                <Button onClick={() => BacktoBegin()}>Back to beginning</Button>
+            </div>
+        )
+    }
+    if (backToBeginning === 2) {
+        return (
+            <div>
+                <Link to="/Surveys">Survey</Link>{' '}
+                <Route path="/Surveys" component={Surveys} />
+            </div>
+        )
+    }
+    if (questionNumber === 0) {
+
+        return (
+            <div>
+                <h4>täytettä</h4>
+                <h1> {currentQuestion} </h1>
+
+                <Button color="primary" onClick={() => begin()}>Begin</Button>
+            </div>
+        )
+    }
+
+    if (questionNumber <= questions.length && questionNumber > 0) {
+
+        return (
+            <div>
+                <h4>täytettä</h4>
+                <h1> {currentQuestion} </h1>
+                <textarea type="text" rows={15} cols={60} name="answer" value={answer.value} onChange={inputChanged} onSelect={clearText} />
+                <br></br>
+                <Button color="primary" onClick={() => displayNextQuestion()}>Next</Button>
+            </div>
+        );
+
+    } else {
+        return (
+            <div>
+                <h4>täytettä</h4>
+                <h1> Submit your feedback to teacher </h1>
+                <Button color="secondary" onClick={() => submitAnswer()}>Submit</Button>
+            </div>
+        )
+    }
+
 }

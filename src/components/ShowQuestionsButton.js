@@ -4,7 +4,8 @@ import Button from '@material-ui/core/Button';
 export default function Showsurveyquestion(props) {
 
   const handleClickOpen = () => {
-    props.showQuestions(props.data.surveyId)
+
+    props.showQuestions(props.data.surveyId, props.data.surveyName)
   }
 
   return (
