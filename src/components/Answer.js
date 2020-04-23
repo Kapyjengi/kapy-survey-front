@@ -94,11 +94,10 @@ export default function Answer(props) {
             let wholeanswer = [];
 
             wholeanswer = {
-                question: {
-                    "questionId": questionsid[i].id,
-                    "questionText": questions[i].questionText
-                },
-                "answerText": realanswer[i].answer.answer
+                "answerText": realanswer[i].answer.answer,
+                "question": {
+                    "questionId": questionsid[i].id
+                }
             }
             //console.log(wholeanswer)
             //console.log(JSON.stringify(wholeanswer))
