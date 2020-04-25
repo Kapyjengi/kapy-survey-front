@@ -35,15 +35,15 @@ export default function AnsweredSurveyCard(props) {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Thank you for taking the time to complete this course survey.
+                        Your answers have been submitted succesfully.
           </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        All of the collected data is handled and analyzed anonymously.
+                     Your answers are highly apprecciated and used to improve this course.
           </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button className={classes.button} size="small" color="default" onClick={() => props.submitAnswer()} >Click here to submit your answers</Button>
+                <Button className={classes.button} size="small" color="default" onClick={() => props.BacktoBegin()} >Back to surveylisting</Button>
             </CardActions>
         </Card>
     );

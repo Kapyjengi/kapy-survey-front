@@ -4,6 +4,7 @@ import Link from '@material-ui/core/Link';
 import { Route } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import AnsweredSurveyCard from './AnsweredSurveyCard'
+import SubmittedAnswersConfirmationCard from './SubmittedAnswersConfirmationCard'
 
 /*
 1. Haetaan tietty kysymysteksti
@@ -30,7 +31,6 @@ export default function Answer(props) {
     const [currentQuestion, setCurrentQuestion] = useState('Start');
     const [backToBeginning, setBackToBeginnig] = useState(0);
     const [answered, setAnswered] = useState(false);
-
 
     useEffect(() => {
         getQuestions();
@@ -62,8 +62,6 @@ export default function Answer(props) {
             .then(_ => displayNextQuestion())
             .catch(err => console.error(err))
     }
-
-
 
     const displayNextQuestion = (event) => {
 
@@ -141,15 +139,14 @@ export default function Answer(props) {
             setAnswered(false)
         }
 
+
     };
     // {question}
     // <button onClick={submitAnswer}>Send</button>
     if (backToBeginning === 1) {
         return (
             <div>
-                <h4>täytettä</h4>
-                <h1>FEEDBACK IS SENDED TO TEACHER</h1>
-                <Button onClick={() => BacktoBegin()}>Back to the surveylist</Button>
+                <SubmittedAnswersConfirmationCard BacktoBegin={BacktoBegin} />
             </div>
         )
     }
@@ -188,22 +185,7 @@ export default function Answer(props) {
     } else {
         return (
             <div>
-                {/*
-                Tämän alla olevan saa poistaa, kunhan allaoleva AnsweredSurveyCard komponentti toimii kunnolla.
-                SubmitAnswers painike AnsweredQeustionCard-komponentissa ei vielä kutsu tämän komponentin
-                samannimistä metodia, joka lähettää käyttäjän vastaukset palvelimelle.
-
-                Card-komponentti pitää sisällään kuvan, tekstin, selityksen vastauksista ja submit-painikkeen.
-
-                */}
-                <h4>täytettä</h4>
-                <p> Thank you for taking the time to complete {props.surveyName} course survey. </p>
-                <p> Your answers are used to improve this course. All of the collected data is handled and analyzed anonymously.</p>
-                <Button color="secondary" onClick={() => submitAnswer()}>Click here to submit answers and finish this survey</Button>
-
-                {/* Kutsutaan card-komponenttia. */}
-                <AnsweredSurveyCard />
-
+                <AnsweredSurveyCard submitAnswer={submitAnswer} />
             </div>
         )
     }
