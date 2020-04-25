@@ -39,10 +39,10 @@ export default function Questionlist(props) {
 
         return (
             <div>
-                <h3>täytettä</h3>
-                <h1>{props.surveyName}</h1>
+                <h1 style={{ marginTop: 50 }} >{props.surveyName}</h1>
                 <Button color="primary"onClick={() => answerToQuestions()}>Answer to questions</Button>
                 <ReactTable
+                    style={{ marginTop: 15 }} 
                     defaultPageSize={10}
                     filterable={true}
                     data={question}

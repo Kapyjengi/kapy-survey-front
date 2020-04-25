@@ -57,8 +57,7 @@ export default function Surveylist() {
   if (questionPattern == "") {
     return (
       <div>
-        <h1> </h1>
-        <ReactTable defaultPageSize={10} filterable={true} data={survey} columns={columns} />
+        <ReactTable style={{ marginTop: 50 }} defaultPageSize={10} filterable={true} data={survey} columns={columns} />
       </div>
     );
   } else {

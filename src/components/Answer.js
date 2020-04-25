@@ -5,6 +5,7 @@ import { Route } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import AnsweredSurveyCard from './AnsweredSurveyCard'
 import SubmittedAnswersConfirmationCard from './SubmittedAnswersConfirmationCard'
+import Typography from '@material-ui/core/Typography';
 
 /*
 1. Haetaan tietty kysymysteksti
@@ -162,9 +163,7 @@ export default function Answer(props) {
 
         return (
             <div>
-                <h4>täytettä</h4>
-                <h1> {currentQuestion} </h1>
-
+                <h1 style={{ marginTop: 50 }} >{currentQuestion} </h1>
                 <Button color="primary" onClick={() => begin()}>Begin</Button>
             </div>
         )
@@ -174,11 +173,10 @@ export default function Answer(props) {
 
         return (
             <div>
-                <h4>täytettä</h4>
-                <h1> {currentQuestion} </h1>
-                <textarea type="text" rows={15} cols={60} name="answer" value={answer.value} onChange={inputChanged} onSelect={clearText} />
+                <Typography style={{ marginTop: 70, marginBottom: 15 }} gutterBottom variant="h5" component="h2"> {currentQuestion} </Typography>
+                <textarea style={{ marginBottom: 10 }} type="text" rows={15} cols={60} name="answer" value={answer.value} onChange={inputChanged} onSelect={clearText} />
                 <br></br>
-                <Button color="primary" onClick={() => displayNextQuestion()}>Next question</Button>
+                <Button style={{ marginTop:15 }} color="primary" onClick={() => displayNextQuestion()}>Next question</Button>
             </div>
         );
 

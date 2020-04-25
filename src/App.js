@@ -15,7 +15,7 @@ function App() {
       <AppBar posiotion="static">
         <Toolbar>
           <Typography variant="h6">KÄPYSurvey</Typography>
-          <Breadcrumbs style={{ margin: 20 }} aria-label="breadcrumb" color="white">
+          <Breadcrumbs style={{ marginLeft: 30, marginTop: 3 }} aria-label="breadcrumb" color="white">
             <Link color="inherit" href="/Surveys" onClick={Surveys}>Surveys</Link>
           </Breadcrumbs>
         </Toolbar>
