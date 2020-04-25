@@ -3,6 +3,7 @@ import Surveys from './Surveys';
 import Link from '@material-ui/core/Link';
 import { Route } from "react-router-dom";
 import Button from '@material-ui/core/Button';
+import AnsweredSurveyCard from './AnsweredSurveyCard'
 
 /*
 1. Haetaan tietty kysymysteksti
@@ -187,11 +188,22 @@ export default function Answer(props) {
     } else {
         return (
             <div>
+                {/*
+                Tämän alla olevan saa poistaa, kunhan allaoleva AnsweredSurveyCard komponentti toimii kunnolla.
+                SubmitAnswers painike AnsweredQeustionCard-komponentissa ei vielä kutsu tämän komponentin
+                samannimistä metodia, joka lähettää käyttäjän vastaukset palvelimelle.
+
+                Card-komponentti pitää sisällään kuvan, tekstin, selityksen vastauksista ja submit-painikkeen.
+
+                */}
                 <h4>täytettä</h4>
                 <p> Thank you for taking the time to complete {props.surveyName} course survey. </p>
                 <p> Your answers are used to improve this course. All of the collected data is handled and analyzed anonymously.</p>
-                <p> Click "Submit answers" button to finish this survey. </p>
-                <Button color="secondary" onClick={() => submitAnswer()}>Submit answers</Button>
+                <Button color="secondary" onClick={() => submitAnswer()}>Click here to submit answers and finish this survey</Button>
+
+                {/* Kutsutaan card-komponenttia. */}
+                <AnsweredSurveyCard />
+
             </div>
         )
     }
