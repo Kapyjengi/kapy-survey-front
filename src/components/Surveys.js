@@ -10,6 +10,7 @@ export default function Surveylist() {
   const [questionPattern, setQuestionPattern] = useState([]);
   const [surveyId, setSurveyId] = useState([]);
   const [surveyName, setSurveyName] = useState([]);
+  const [surveyDescription, setSurveyDescription] = useState([]);
 
   useEffect(() => {
     getSurveys();
@@ -22,9 +23,10 @@ export default function Surveylist() {
       .catch(err => console.error(err))
   }
 
-  const showQuestions = (id, surveyname) => {
+  const showQuestions = (id, surveyname, surveydescription) => {
     setSurveyId(id);
     setSurveyName(surveyname)
+    setSurveyDescription(surveydescription)
 
     fetch('https://kapysurvey-back.herokuapp.com/surveys/' + id)
       .then(response => response.json())
@@ -63,7 +65,7 @@ export default function Surveylist() {
   } else {
     return (
       <div>
-        <Questions surveyId={surveyId} surveyName={surveyName} />
+        <Questions surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/>
       </div>
     )
   }

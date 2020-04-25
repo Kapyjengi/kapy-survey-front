@@ -7,7 +7,6 @@ import Surveys from './components/Surveys';
 import { BrowserRouter, Route } from "react-router-dom"
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
-import Answer from './components/Answer';
 
 function App() {
   return (
@@ -25,7 +24,6 @@ function App() {
           <Link to="/Surveys">Survey</Link>{' '}
           <Route path="/Surveys" component={Surveys} />
         </div>
-
       </BrowserRouter>
     </div>
   );

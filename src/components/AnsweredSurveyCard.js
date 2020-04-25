@@ -35,7 +35,7 @@ export default function AnsweredSurveyCard(props) {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Thank you for taking the time to complete this course survey.
+                        Thank you for taking the time to complete {props.surveyName} course survey.
           </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         All of the collected data is handled and analyzed anonymously.

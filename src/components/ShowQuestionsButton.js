@@ -5,7 +5,7 @@ export default function Showsurveyquestion(props) {
 
   const handleClickOpen = () => {
 
-    props.showQuestions(props.data.surveyId, props.data.surveyName)
+    props.showQuestions(props.data.surveyId, props.data.surveyName, props.data.surveyDescription)
   }
 
   return (

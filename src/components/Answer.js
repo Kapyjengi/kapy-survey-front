@@ -4,7 +4,7 @@ import Link from '@material-ui/core/Link';
 import { Route } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import AnsweredSurveyCard from './AnsweredSurveyCard'
-import SubmittedAnswersConfirmationCard from './SubmittedAnswersConfirmationCard'
+import SubmittedAnswersConfirmationCard from './SubmittedAnswersConfirmationCard';
 import Typography from '@material-ui/core/Typography';
 
 /*
@@ -29,7 +29,7 @@ export default function Answer(props) {
     const [questions, setQuestions] = useState([]);
     const [questionsid, setQuestionsid] = useState([]);
     const [questionNumber, setQuestionNumber] = useState(-1);
-    const [currentQuestion, setCurrentQuestion] = useState('Start');
+    const [currentQuestion, setCurrentQuestion] = useState('Please let us know your feedback.');
     const [backToBeginning, setBackToBeginnig] = useState(0);
     const [answered, setAnswered] = useState(false);
 
@@ -163,7 +163,7 @@ export default function Answer(props) {
 
         return (
             <div>
-                <h1 style={{ marginTop: 50 }} >{currentQuestion} </h1>
+                <Typography style={{ marginTop: 60 }} gutterBottom variant="h5" component="h2"> {currentQuestion} </Typography>
                 <Button color="primary" onClick={() => begin()}>Begin</Button>
             </div>
         )
@@ -173,10 +173,10 @@ export default function Answer(props) {
 
         return (
             <div>
-                <Typography style={{ marginTop: 70, marginBottom: 15 }} gutterBottom variant="h5" component="h2"> {currentQuestion} </Typography>
-                <textarea style={{ marginBottom: 10 }} type="text" rows={15} cols={60} name="answer" value={answer.value} onChange={inputChanged} onSelect={clearText} />
+                <Typography style={{ marginTop: 60, marginBottom: 30 }} gutterBottom variant="h5" component="h2"> {currentQuestion} </Typography>
+                <textarea style={{ marginBottom: 30 }} type="text" rows={15} cols={60} name="answer" value={answer.value} onChange={inputChanged} onSelect={clearText} />
                 <br></br>
-                <Button style={{ marginTop:15 }} color="primary" onClick={() => displayNextQuestion()}>Next question</Button>
+                <Button color="primary" onClick={() => displayNextQuestion()}>Next question</Button>
             </div>
         );
 

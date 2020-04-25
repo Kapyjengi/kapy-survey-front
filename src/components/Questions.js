@@ -3,6 +3,7 @@ import ReactTable from 'react-table-v6';
 import 'react-table-v6/react-table.css';
 import Answer from './Answer'
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 export default function Questionlist(props) {
 
@@ -39,10 +40,11 @@ export default function Questionlist(props) {
 
         return (
             <div>
-                <h1 style={{ marginTop: 50 }} >{props.surveyName}</h1>
-                <Button color="primary"onClick={() => answerToQuestions()}>Answer to questions</Button>
+                <Typography style={{ marginTop: 50, marginBottom: 10 }} gutterBottom variant="h5" component="h2"> {props.surveyDescription} </Typography>
+                <Typography style={{ marginBottom: 5 }} gutterBottom variant="h6" component="h2"> {props.surveyName} </Typography>
+                <Button color="primary"onClick={() => answerToQuestions()}>Take part in the survey</Button>
                 <ReactTable
-                    style={{ marginTop: 15 }} 
+                    style={{ marginTop: 10 }}    
                     defaultPageSize={10}
                     filterable={true}
                     data={question}
