@@ -4,8 +4,6 @@ import 'react-table-v6/react-table.css';
 import Answer from './Answer'
 import Button from '@material-ui/core/Button';
 
-
-
 export default function Questionlist(props) {
 
     const [question, setQuestion] = useState([]);
@@ -20,7 +18,6 @@ export default function Questionlist(props) {
             .then(response => response.json())
             .then(data => setQuestion(data.questions))
             .catch(err => console.error(err))
-
     }
 
     const columns = [

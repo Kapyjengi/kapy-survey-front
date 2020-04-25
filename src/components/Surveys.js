@@ -22,7 +22,6 @@ export default function Surveylist() {
       .catch(err => console.error(err))
   }
 
-
   const showQuestions = (id, surveyname) => {
     setSurveyId(id);
     setSurveyName(surveyname)

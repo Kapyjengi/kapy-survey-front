@@ -4,7 +4,6 @@ import Link from '@material-ui/core/Link';
 import { Route } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 
-
 /*
 1. Haetaan tietty kysymysteksti
 2. Syötetään vastaus
@@ -149,7 +148,7 @@ export default function Answer(props) {
             <div>
                 <h4>täytettä</h4>
                 <h1>FEEDBACK IS SENDED TO TEACHER</h1>
-                <Button onClick={() => BacktoBegin()}>Back to beginning</Button>
+                <Button onClick={() => BacktoBegin()}>Back to the surveylist</Button>
             </div>
         )
     }
@@ -181,7 +180,7 @@ export default function Answer(props) {
                 <h1> {currentQuestion} </h1>
                 <textarea type="text" rows={15} cols={60} name="answer" value={answer.value} onChange={inputChanged} onSelect={clearText} />
                 <br></br>
-                <Button color="primary" onClick={() => displayNextQuestion()}>Next</Button>
+                <Button color="primary" onClick={() => displayNextQuestion()}>Next question</Button>
             </div>
         );
 
@@ -189,8 +188,10 @@ export default function Answer(props) {
         return (
             <div>
                 <h4>täytettä</h4>
-                <h1> Submit your feedback to teacher </h1>
-                <Button color="secondary" onClick={() => submitAnswer()}>Submit</Button>
+                <p> Thank you for taking the time to complete {props.surveyName} course survey. </p>
+                <p> Your answers are used to improve this course. All of the collected data is handled and analyzed anonymously.</p>
+                <p> Click "Submit answers" button to finish this survey. </p>
+                <Button color="secondary" onClick={() => submitAnswer()}>Submit answers</Button>
             </div>
         )
     }
