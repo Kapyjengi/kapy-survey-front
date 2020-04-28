@@ -127,13 +127,13 @@ export default function Answer(props) {
     };
 
     const clearText = (event) => {
-        if (answered == true) {
+        if (answered === true) {
             event.target.value = "";
             setAnswered(false)
         }
     }
     const inputChanged = (event) => {
-        if (answered == false) {
+        if (answered === false) {
             setAnswer({ ...answer, [event.target.name]: event.target.value });
         } else {
             event.target.value = "";
