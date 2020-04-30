@@ -83,7 +83,7 @@ export default function Surveylist() {
   if (showQs!==0 && questionPattern !=="") {
     return (
       <div>
-        <Answerslist surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription} questions={questionPattern} answers={answers}/>
+        <Answerslist surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/>
       </div>
     )
   }
