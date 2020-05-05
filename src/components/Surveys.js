@@ -5,7 +5,8 @@ import ShowQuestionsButton from './ShowQuestionsButton';
 import ShowAnswersButton from './ShowAnswersButton';
 import Questions from './Questions';
 import AnswerlistTreeData from './AnswerlistTreedata';
-import TestMaterialTable from './TestMaterialTable'
+import TestMaterialTable from './TestMaterialTable';
+import Answeralistmonimutkainen from './Answerslistmonimutkainen'
 
 export default function Surveylist() {
 
@@ -16,6 +17,7 @@ export default function Surveylist() {
   const [surveyDescription, setSurveyDescription] = useState([]);
   const [answers, setAnwers] = useState([]);
   const [showQs, setShowQs] = useState(0);
+  const [kokosetti, LKokosetti] = useState();
 
   useEffect(() => {
     getSurveys();
@@ -45,6 +47,11 @@ export default function Surveylist() {
     setSurveyDescription(surveydescription)
     setShowQs(1)
     
+    fetch('https://kapysurvey-back.herokuapp.com/surveys/' + id + '/questions')
+    .then(response => response.json())
+    .then(data => LKokosetti(data))
+    .catch(err => console.error(err))
+
     fetch('https://kapysurvey-back.herokuapp.com/surveys/' + id)
       .then(response => response.json())
       .then(data => setQuestionPattern(data.questions))
@@ -53,9 +60,7 @@ export default function Surveylist() {
     fetch('https://kapysurvey-back.herokuapp.com/answers')
       .then(response => response.json())
       .then(data => setAnwers(data))
-      .catch(err => console.error(err))
-
-    
+      .catch(err => console.error(err))    
   }
 
   const columns = [
@@ -84,8 +89,9 @@ export default function Surveylist() {
   if (showQs!==0 && questionPattern !=="") {
     return (
       <div>
-        {/* <AnswerlistTreeData surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/> */}
-        <TestMaterialTable surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/>
+        <AnswerlistTreeData surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/> 
+        {/* <TestMaterialTable surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/> */}
+        
       </div>
     )
   }
