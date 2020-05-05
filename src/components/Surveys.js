@@ -6,6 +6,7 @@ import ShowAnswersButton from './ShowAnswersButton';
 import Questions from './Questions';
 import AnswerlistTreeData from './AnswerlistTreedata';
 import TestMaterialTable from './TestMaterialTable'
+import TestTreeDataTable from './TestTreeDataTable'
 
 export default function Surveylist() {
 
@@ -84,8 +85,9 @@ export default function Surveylist() {
   if (showQs!==0 && questionPattern !=="") {
     return (
       <div>
+        <TestTreeDataTable surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/>
         {/* <AnswerlistTreeData surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/> */}
-        <TestMaterialTable surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/>
+        {/* <TestMaterialTable surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/> */}
       </div>
     )
   }
