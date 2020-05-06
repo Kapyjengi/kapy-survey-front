@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import AnsweredSurveyCard from './AnsweredSurveyCard'
 import SubmittedAnswersConfirmationCard from './SubmittedAnswersConfirmationCard';
 import Typography from '@material-ui/core/Typography';
+import RadioAnswer from './RadioAnswer';
+import CheckboxAnswer from './CheckboxAnswer';
 
 /*
 1. Haetaan tietty kysymysteksti
@@ -173,10 +175,31 @@ export default function Answer(props) {
 
         return (
             <div>
+
+
                 <Typography style={{ marginTop: 60, marginBottom: 30 }} gutterBottom variant="h5" component="h2"> {currentQuestion} </Typography>
                 <textarea style={{ marginBottom: 30 }} type="text" rows={15} cols={60} name="answer" value={answer.value} onChange={inputChanged} onSelect={clearText} />
                 <br></br>
-                <Button color="primary" onClick={() => displayNextQuestion()}>Next question</Button>
+                <Button style={{ marginBottom: 10 }} color="primary" onClick={() => displayNextQuestion()}>Next question</Button>
+                <br></br>
+
+                {/* TESTIRADIOBUTTON */}
+                {/* Kutsutaan komponenttia, jos
+                kyseessä on radiokysymys */}
+                <RadioAnswer
+                    currentQuestion={currentQuestion}
+                    style={{ marginTop: 10 }} />
+                {/* TESTIRADIOBUTTON */}
+
+                {/* TESTICHECKBOX */}
+                {/* Kutsutaan komponenttia, jos
+                kyseessä on monivalintakysymys */}
+                <CheckboxAnswer
+                    currentQuestion={currentQuestion}
+                    style={{ marginTop: 10}} />
+                {/* TESTICHECKBOX */}
+
+
             </div>
         );
 
