@@ -4,9 +4,8 @@ import 'react-table-v6/react-table.css';
 import ShowQuestionsButton from './ShowQuestionsButton';
 import ShowAnswersButton from './ShowAnswersButton';
 import Questions from './Questions';
-import AnswerlistTreeData from './AnswerlistTreedata';
-import TestMaterialTable from './TestMaterialTable';
-import Answeralistmonimutkainen from './Answerslistmonimutkainen'
+import Answerlist from './Answerlist';
+
 
 export default function Surveylist() {
 
@@ -17,7 +16,6 @@ export default function Surveylist() {
   const [surveyDescription, setSurveyDescription] = useState([]);
   const [answers, setAnwers] = useState([]);
   const [showQs, setShowQs] = useState(0);
-  const [kokosetti, LKokosetti] = useState();
 
   useEffect(() => {
     getSurveys();
@@ -46,32 +44,15 @@ export default function Surveylist() {
     setSurveyName(surveyname)
     setSurveyDescription(surveydescription)
     setShowQs(1)
-    
-    fetch('https://kapysurvey-back.herokuapp.com/surveys/' + id + '/questions')
-    .then(response => response.json())
-    .then(data => LKokosetti(data))
-    .catch(err => console.error(err))
 
     fetch('https://kapysurvey-back.herokuapp.com/surveys/' + id)
       .then(response => response.json())
       .then(data => setQuestionPattern(data.questions))
       .catch(err => console.error(err))
-
-    fetch('https://kapysurvey-back.herokuapp.com/answers')
-      .then(response => response.json())
-      .then(data => setAnwers(data))
-      .catch(err => console.error(err))    
+  
   }
 
   const columns = [
-    {
-      Cell: row => (<ShowAnswersButton data={row.original} showAnswers={showAnswers} />)
-    },
-    {
-      Header: 'Survey id',
-      accessor: 'surveyId'
-
-    },
     {
       Header: 'Survey name',
       accessor: 'surveyName'
@@ -81,17 +62,20 @@ export default function Surveylist() {
       accessor: 'surveyDescription'
     },
     {
-      Cell: row => (<ShowQuestionsButton data={row.original} showQuestions={showQuestions} />)
-    }
+      Cell: row => (<ShowQuestionsButton data={row.original} showQuestions={showQuestions} />),
+      minWidth: 60
+    },
+    {
+      Cell: row => (<ShowAnswersButton data={row.original} showAnswers={showAnswers} />),
+      minWidth: 60
+    },
   ]
 
    
   if (showQs!==0 && questionPattern !=="") {
     return (
       <div>
-        <AnswerlistTreeData surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/> 
-        {/* <TestMaterialTable surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/> */}
-        
+        <Answerlist surveyId={surveyId} surveyName={surveyName} surveyDescription={surveyDescription}/> 
       </div>
     )
   }

@@ -19,15 +19,13 @@ export default function ShowAnswerlistTreeData(props) {
     }
     console.log(list)
 
-    let vas=[];
+    let answer=[];
     for (const iterator of list) {
-      //console.log(iterator.answers)
       for (let i = 0; i < iterator.answers.length; i++) { 
-        vas.push({id:iterator.questionId, questionText: iterator.questionText,answer:iterator.answers[i].answerText,qid:iterator.questionId})
+        answer.push({id:iterator.questionId, questionText: iterator.questionText,answer:iterator.answers[i].answerText,qid:iterator.questionId})
         
       }
     }
-    //console.log(vas)
     
     const tableIcons = { 
       FirstPage: FirstPage,
@@ -44,25 +42,22 @@ export default function ShowAnswerlistTreeData(props) {
         <div>
             <Typography 
             gutterBottom variant='h6' component='h6'
-            style={{ marginTop: 50 }}>Käytä hakukenttää haluamasi kysymyksen vastausten hakuun.
+            style={{ marginTop: 50 }}>Use search bar to sort answers by question.
             </Typography>
             <MaterialTable
                 style={{ marginTop: 20, marginLeft: 10, marginRight: 10 }}
                 title={props.surveyName + " - " + props.surveyDescription}
-                data={vas}
+                data={answer}
                   columns={[
-                    /* { title: 'questionId', field: 'questionId' }, */
                     { title: 'Question', field: 'questionText' },
-                    /* { title: 'answerId', field: 'answers[0].answerId' }, */
-                    { title: 'Answer', field: 'answer' },
+                    { title: 'Answer', field: 'answer' }
                   ]}
-                  //parentChildData={(row, rows) => rows.find(a => a.questionId === row.answerId)}
-                  parentChildData={(row, rows) => rows.find(a => a.questionId === row.id)}
                   icons={tableIcons}
                   options={{
                     pageSize: 20,
-                    pageSizeOptions: [10, 20, 50, 100, 200]
-                    //filtering: true
+                    pageSizeOptions: [10, 20, 50, 100, 200],
+                    //Jos haluat filtteröinnin jokaiselle kolumnille niin anna filterin arvoksi true
+                    filtering: false
                   }}
                 />
                 </div>

@@ -23,10 +23,6 @@ export default function Questionlist(props) {
 
     const columns = [
         {
-            Header: 'Id',
-            accessor: 'questionId'
-        },
-        {
             Header: 'Question',
             accessor: 'questionText'
         }
@@ -44,7 +40,7 @@ export default function Questionlist(props) {
                 <Typography style={{ marginBottom: 5 }} gutterBottom variant="h6" component="h2"> {props.surveyName} </Typography>
                 <Button color="primary"onClick={() => answerToQuestions()}>Take part in the survey</Button>
                 <ReactTable
-                    style={{ marginTop: 10 }}    
+                    style={{ marginTop: 10, marginRight: 200, marginLeft: 200}}    
                     defaultPageSize={10}
                     filterable={true}
                     data={question}

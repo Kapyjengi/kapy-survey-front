@@ -37,40 +37,20 @@ export default function Answer(props) {
 
     useEffect(() => {
         getQuestions();
-        //  testData(); // TEST
-        //wait(1000);
-
-        //  displayNextQuestion();
     }, [])
-
-    // TEST
-    const testData = () => {
-        setQuestions(["Oliko hyvaa", "Miltä tuntuu", "Katsoitko peiliin"]);
-
-    }
-    // TEST
-    function wait(ms) {
-        var start = new Date().getTime();
-        var end = start;
-        while (end < start + ms) {
-            end = new Date().getTime();
-        }
-    }
 
     const getQuestions = () => {
         fetch('https://kapysurvey-back.herokuapp.com/surveys/' + props.surveyId
         )
             .then(response => response.json())
-            .then(data => setQuestions(data.questions)) // TODO
+            .then(data => setQuestions(data.questions)) 
             .then(_ => displayNextQuestion())
             .catch(err => console.error(err))
     }
 
     const displayNextQuestion = (event) => {
 
-        //console.log(questionNumber)
         for (let index = 0; index < questions.length; index++) {
-            //console.log("i:" + questionNumber + "  index:" + index)
             if (questionNumber === index) {
                 setQuestionsid([...questionsid, { id: questions[index].questionId }])
                 setCurrentQuestion(questions[index].questionText)
@@ -100,9 +80,6 @@ export default function Answer(props) {
                     "questionId": questionsid[i].id
                 }
             }
-            //console.log(wholeanswer)
-            //console.log(JSON.stringify(wholeanswer))
-
 
             fetch('https://kapysurvey-back.herokuapp.com/submitanswer',
                 {
@@ -114,7 +91,7 @@ export default function Answer(props) {
                 })
                 .catch(err => console.error(err))
 
-        } // for
+        } 
         setBackToBeginnig(1)
 
     }
@@ -144,8 +121,6 @@ export default function Answer(props) {
 
 
     };
-    // {question}
-    // <button onClick={submitAnswer}>Send</button>
     if (backToBeginning === 1) {
         return (
             <div>
